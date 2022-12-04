@@ -37,7 +37,7 @@ func (r *Rabbitx) Channel() (*amqp.Channel, error) {
 
 // MsgHandler 表示消息处理的接口
 type MsgHandler interface {
-	handle(amqp.Delivery)
+	Handle(amqp.Delivery)
 }
 
 // Consume 消费队列里的消息
@@ -64,7 +64,7 @@ func (r *Rabbitx) Consume(queueName string, autoAck bool, handler MsgHandler) er
 	// 打印消息体
 	for delivery := range deliveries {
 		// 消息处理，handleFunc 无需负责 ack
-		handler.handle(delivery)
+		handler.Handle(delivery)
 		if autoAck == false {
 			errAck := delivery.Ack(false)
 			if errAck != nil {
