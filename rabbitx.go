@@ -64,7 +64,7 @@ func (r *Rabbitx) Consume(queueName string, autoAck bool, handler msgHandler) er
 	// 打印消息体
 	for delivery := range deliveries {
 		// 消息处理，handleFunc 无需负责 ack
-		handler.handleFunc(delivery)
+		handler.handle(delivery)
 		if autoAck == false {
 			errAck := delivery.Ack(false)
 			if errAck != nil {
