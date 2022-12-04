@@ -37,7 +37,7 @@ func (r *Rabbitx) Channel() (*amqp.Channel, error) {
 
 // msgHandler 表示消息处理的接口
 type msgHandler interface {
-	handleFunc(amqp.Delivery)
+	handle(amqp.Delivery)
 }
 
 // Consume 消费队列里的消息
